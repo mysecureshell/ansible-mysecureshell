@@ -1,0 +1,7 @@
+---
+
+- name: ensure MySecureShell service is started
+  service:
+    name: mysecureshell
+    state: started
+  when: mysecureshell_manage_service

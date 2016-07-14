@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+{% for parent in mysecureshell_config %}
+{% if parent == "Default" %}
+
+<{{parent}}>
+{% for key,value in mysecureshell_config[parent].items() %}
+  {{key}} {{value}}
+{% endfor %}
+</{{parent}}>
+{% else %}
+{% for parent_value in mysecureshell_config[parent] %}
+
+<{{parent}} {{parent_value.name}}>
+{% for key,value in parent_value.items() %}
+{% if key != "name" %}
+  {{key}} {{value}}
+{% endif %}
+{% endfor %}
+</{{parent}}>
+{% endfor %}
+{% endif %}
+{% endfor %}

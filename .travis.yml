@@ -1,0 +1,42 @@
+# .travis.yml
+---
+
+language: python
+sudo: required
+env:
+  - >
+    docker_autor=deimosfr
+    image_name=ansible-ubuntu-1604
+
+services:
+  - docker
+
+before_install:
+  - sudo docker pull ${docker_autor}/${image_name}
+
+script:
+  - container_id=$(mktemp)
+    # Run container
+  - >
+    sudo docker run -d --volume="${PWD}":/etc/ansible/roles/deimosfr.mysecureshell:ro
+    ${docker_autor}/${image_name}:latest sleep 1800 > "${container_id}"
+    # Check Ansible syntax
+  - >
+    sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
+    ansible-playbook /etc/ansible/roles/deimosfr.mysecureshell/tests/site.yml --syntax-check
+    # Role test
+  - >
+    sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm
+    ansible-playbook /etc/ansible/roles/deimosfr.mysecureshell/tests/site.yml
+    # Idempotence test
+  - >
+    sudo docker exec "$(cat ${container_id})" env TERM=xterm
+    ansible-playbook /etc/ansible/roles/deimosfr.mysecureshell/tests/site.yml
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+    # Cleanup
+  - sudo docker stop "$(cat ${container_id})"
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

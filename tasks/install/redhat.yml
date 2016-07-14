@@ -1,0 +1,14 @@
+---
+
+- name: add MySecureShell yum repository
+  yum_repository:
+    name: MySecureShell
+    baseurl: "{{mysecureshell_yum_repo}}"
+    gpgcheck: no
+    enabled: yes
+
+- name: install MySecureShell
+  yum:
+    name: "mysecureshell"
+    update_cache: yes
+    state: present

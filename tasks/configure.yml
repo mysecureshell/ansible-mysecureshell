@@ -1,0 +1,10 @@
+---
+
+- name: configure MySecureShell
+  template:
+    src: "sftp_config.j2"
+    dest: "/etc/ssh/sftp_config"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  notify: restart MySecureShell

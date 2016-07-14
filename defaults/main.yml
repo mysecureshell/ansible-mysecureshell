@@ -1,0 +1,41 @@
+---
+
+# Set it to false and uncomment the desired lines below if you don't want to
+# install the version provided by your distribution
+mysecureshell_use_distribution_repo: true
+
+# Debian
+#mysecureshell_apt_repo: "deb http://mysecureshell.free.fr/repository/index.php/debian/7.1 testing main"
+#mysecureshell_apt_repo: "deb http://mysecureshell.free.fr/repository/index.php/debian/6.0 testing main"
+
+# Ubuntu
+#mysecureshell_apt_repo: "deb http://mysecureshell.free.fr/repository/index.php/ubuntu/12.04 testing main"
+#mysecureshell_apt_repo: "deb http://mysecureshell.free.fr/repository/index.php/ubuntu/10.10 testing main"
+
+# RedHat/CentOS
+#mysecureshell_yum_repo: "http://mysecureshell.free.fr/repository/index.php/centos/6.4/"
+#mysecureshell_yum_repo: "http://mysecureshell.free.fr/repository/index.php/centos/5.5/"
+
+# Fedora
+#mysecureshell_yum_repo: "http://mysecureshell.free.fr/repository/index.php/fedora/19/"
+#mysecureshell_yum_repo: "http://mysecureshell.free.fr/repository/index.php/fedora/17/"
+
+mysecureshell_config:
+  Default:
+    Home: "/home/$USER"
+    VirtualChroot: "true"
+#  Group:
+#    - name: "admins"
+#      Download: "10M"
+#    - name: "others"
+#      Download: "1M"
+#  User:
+#    - name: "superuser"
+#      VirtualChroot: "false"
+#      Download: "100M"
+
+# Update users list to MySecureShell shell
+mysecureshell_users:
+
+mysecureshell_manage_service: true
+mysecureshell_binary_path: "/usr/bin/mysecureshell"

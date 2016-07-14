@@ -1,0 +1,19 @@
+---
+
+- name: install MySecureShell apt key for custom repository
+  apt_key:
+    keyserver: "pool.sks-keyservers.net"
+    id: "E328F22B"
+    state: present
+  when: mysecureshell_use_distribution_repo == False
+
+- name: configure MySecureShell custom repository
+  apt_repository:
+    repo: "{{mysecureshell_apt_repo}}"
+  when: mysecureshell_use_distribution_repo == False
+
+- name: install MySecureShell
+  apt:
+    name: "mysecureshell"
+    update_cache: yes
+    state: present

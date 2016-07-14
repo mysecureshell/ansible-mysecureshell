@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  author: "Pierre Mavro"
+  company:
+  license: GPL
+  min_ansible_version: 1.6
+  platforms:
+   - name: Debian
+     versions:
+      - squeeze
+      - wheezy
+      - jessie
+   - name: Ubuntu
+     versions:
+      - maverick
+      - precise
+      - wily
+      - xenial
+   - name: EL
+     versions:
+      - 5
+      - 6
+  galaxy_tags:
+   - system
+   - security
+   - network
+   - server
+   - shell
+   - sftp
+dependencies: []

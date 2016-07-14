@@ -1,0 +1,10 @@
+---
+
+- name: set MySecureShell to specified users
+  user:
+    name: "{{item}}"
+    createhome: no
+    shell: "{{mysecureshell_binary_path}}"
+    state: present
+  with_items: "{{mysecureshell_users}}"
+  when: mysecureshell_users

@@ -1,0 +1,7 @@
+---
+
+- name: restart MySecureShell
+  service:
+    name: "mysecureshell"
+    state: restarted
+  when: mysecureshell_manage_service

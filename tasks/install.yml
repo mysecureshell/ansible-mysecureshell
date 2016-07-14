@@ -1,0 +1,18 @@
+---
+
+- include: install/debian.yml
+  when: ansible_distribution == "Debian" or
+        ansible_distribution == "Ubuntu"
+
+- include: install/redhat.yml
+  when: ansible_distribution == "RedHat" or
+        ansible_distribution == "CentOS" or
+        ansible_distribution == "Fedora"
+
+- name: ensure MySecureShell permissions are correct
+  file:
+    path: "{{mysecureshell_binary_path}}"
+    owner: "root"
+    group: "root"
+    mode: "4755"
+    state: "file"
